@@ -1,5 +1,5 @@
 
-# Setup Mysql database using docker
+# Database
 
 ## Local
 
@@ -13,11 +13,7 @@ docker run --name demo_db_dev -p 3307:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql:
 
 docker run --name demo_db_prod -p 3308:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql:latest
 
-# Build and Test
-
-## Local
-
-./mvnw clean package
+# Build
 
 ## Development
 
@@ -33,10 +29,12 @@ docker run --name demo_db_prod -p 3308:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql
 
 ./mvnw spring-boot:run
 
-## Development
+# Test
 
-./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
+./mvnw test
 
-## Production
+# Docker image
 
-./mvnw spring-boot:run -Dspring-boot.run.profiles=prod
+## Build application for specific env, push image to the docker hub
+
+./mvnw dockerfile: push -P${env}
